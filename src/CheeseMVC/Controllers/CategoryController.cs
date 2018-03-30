@@ -14,7 +14,6 @@ namespace CheeseMVC.Controllers
             List<CheeseCategory> categories = context.CheeseCategories.ToList();
 
             ViewBag.title = "All the cheese categories";
-
             
             return View(categories);
            
@@ -25,9 +24,27 @@ namespace CheeseMVC.Controllers
             AddCategoryViewModel addCategoryViewModel = new AddCategoryViewModel();
             return View(addCategoryViewModel);
         }
-        
-        
 
+        [HttpPost]
+        public IActionResult Add(AddCategoryViewModel addCategoryViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                // Add the new cheese to my existing cheeses
+                CheeseCategory newCategory = new CheeseCategory
+                {
+                    Name = addCategoryViewModel.Name,
+                };
+
+                context.Categories.Add(newCategory);
+                context.SaveChanges();
+
+                return Redirect("/Category");
+            }
+            // if !Model.State.IsValid it skips down to here
+            return View(addCategoryViewModel);
+        }
+        
         private readonly CheeseDbContext context;
 
         public CategoryController(CheeseDbContext dbContext)

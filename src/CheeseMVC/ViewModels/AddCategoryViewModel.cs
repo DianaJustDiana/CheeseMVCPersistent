@@ -6,6 +6,6 @@ namespace CheeseMVC.ViewModels
     {
         [Required]
         [Display(Name = "Category Name")]
-        public string Category { get; set; }
+        public string Name { get; set; }
     }
 }
