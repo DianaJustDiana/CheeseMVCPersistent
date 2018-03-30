@@ -30,9 +30,11 @@ namespace CheeseMVC
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<CheeseDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<CheeseDbContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddDbContext<CheeseDbContext>(options =>
+                options.UseSqlite("DataSource=CheeseMVC.sqlite"));
             // Add framework services.
             services.AddMvc();
         }
