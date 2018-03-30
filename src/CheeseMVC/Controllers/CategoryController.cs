@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CheeseMVC.Data;
 using CheeseMVC.Models;
+using CheeseMVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CheeseMVC.Controllers
