@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CheeseMVC.Data;
 using CheeseMVC.Models;
 using CheeseMVC.ViewModels;
@@ -11,7 +12,7 @@ namespace CheeseMVC.Controllers
         // GET
         public IActionResult Index()
         {
-            List<CheeseCategory> categories = context.CheeseCategories.ToList();
+            List<CheeseCategory> categories = context.Categories.ToList();
 
             ViewBag.title = "All the cheese categories";
             
