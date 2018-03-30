@@ -19,6 +19,13 @@ namespace CheeseMVC.Controllers
            
         }
 
+        public IActionResult Add()
+        {
+            AddCategoryViewModel addCategoryViewModel = new AddCategoryViewModel();
+            return View(addCategoryViewModel);
+        }
+        
+        
 
         private readonly CheeseDbContext context;
 
