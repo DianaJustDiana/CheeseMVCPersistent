@@ -1,4 +1,6 @@
-﻿using CheeseMVC.Data;
+﻿using System.Collections.Generic;
+using CheeseMVC.Data;
+using CheeseMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CheeseMVC.Controllers
@@ -8,8 +10,13 @@ namespace CheeseMVC.Controllers
         // GET
         public IActionResult Index()
         {
-            return
-            View();
+            List<CheeseCategory> categories = context.CheeseCategories.ToList();
+
+            ViewBag.title = "All the cheese categories";
+
+            
+            return View(categories);
+           
         }
 
 
