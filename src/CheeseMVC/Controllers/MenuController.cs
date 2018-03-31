@@ -35,7 +35,7 @@ namespace CheeseMVC.Controllers
                 // Add the new menu to my existing menus
                 Menu newMenu = new Menu
                 {
-                    Name = addMenuViewModel.Name,
+                    Name = addMenuViewModel.Name
                 };
 
                 context.Menus.Add(newMenu);
@@ -50,13 +50,9 @@ namespace CheeseMVC.Controllers
         //get
         public IActionResult ViewMenu(int id)
         {
-            List<CheeseMenu> items = context
-                .CheeseMenus
-                .Include(item => item.Cheese)
-                .Where(cm => cm.MenuID == id)
-                .ToList();
-            
-            Menu menu = context.Menus.Single(m=> m.ID == id)
+            List<CheeseMenu> items = context.CheeseMenus.Include(item => item.Cheese).Where(cm => cm.MenuID == id).ToList();
+
+            Menu menu = context.Menus.Single(m => m.ID == id);
 
             ViewMenuViewModel viewModel = new ViewMenuViewModel
             {
@@ -66,6 +62,42 @@ namespace CheeseMVC.Controllers
 
             return View(viewModel);
         }
+
+        //get
+        public IActionResult AddItem(int id)
+        {
+            Menu menu = context.Menus.Single(m => m.ID == id);
+            List<Cheese> cheeses = context.Cheeses.ToList();
+            
+            return View(new AddMenuItemViewModel(menu, cheeses));
+        }
+
+        [HttpPost]
+        public IActionResult AddItem(AddMenuItemViewModel addMenuItemViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var cheeseID = addMenuItemViewModel.CheeseID;
+                var menuID = addMenuItemViewModel.MenuID;
+                
+                IList<CheeseMenu> existingItems = context.CheeseMenus
+                    .Where(cm => cm.CheeseID == cheeseID)
+                    .Where(cm => cm.MenuID == menuID).ToList();
+
+                if (existingItems.Count == 0)
+                {
+                    CheeseMenu menuItem = new CheeseMenu();
+                    {
+                        Cheese = context.Cheeses.Single(c => c.ID == cheeseID),
+                        Menu = context.Menus.Single(m => m.ID == menuID)
+                    }
+                }
+                    
+                                                                                  )
+            }
+        }
+        
+        
         
         private readonly CheeseDbContext context;
 
