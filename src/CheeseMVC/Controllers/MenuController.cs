@@ -4,6 +4,8 @@ using CheeseMVC.Data;
 using CheeseMVC.Models;
 using CheeseMVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.WindowsAzure.Storage.Queue;
 
 namespace CheeseMVC.Controllers
 {
@@ -45,7 +47,26 @@ namespace CheeseMVC.Controllers
             return View(addMenuViewModel);
         }
        
+        //get
+        public IActionResult ViewMenu(int id)
+        {
+            List<CheeseMenu> items = context
+                .CheeseMenus
+                .Include(item => item.Cheese)
+                .Where(cm => cm.MenuID == id)
+                .ToList();
+            
+            Menu menu = context.Menus.Single(m=> m.ID == id)
 
+            ViewMenuViewModel viewModel = new ViewMenuViewModel
+            {
+                Menu = menu,
+                Items = items
+            };
+
+            return View(viewModel);
+        }
+        
         private readonly CheeseDbContext context;
 
         public MenuController(CheeseDbContext dbContext)
