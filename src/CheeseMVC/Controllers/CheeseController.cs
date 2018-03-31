@@ -28,7 +28,8 @@ namespace CheeseMVC.Controllers
 
         public IActionResult Add()
         {
-            AddCheeseViewModel addCheeseViewModel = new AddCheeseViewModel();
+            
+            AddCheeseViewModel addCheeseViewModel = new AddCheeseViewModel(context.Categories.ToList());
             return View(addCheeseViewModel);
         }
 
@@ -38,7 +39,6 @@ namespace CheeseMVC.Controllers
             if (ModelState.IsValid)
             {
                 // Add new cheese category
-                // Adapt c.ID code from Remove method below
                 CheeseCategory newCheeseCategory =
                     context.Categories.Single(c => c.ID == addCheeseViewModel.CategoryID);
                 
