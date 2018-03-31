@@ -6,7 +6,9 @@
         public string Description { get; set; }
         //public CheeseType Type { get; set; }
         public int ID { get; set; }
+        // navigation property
         public CheeseCategory Category { get; set; }
+        // foreign key
         public int CategoryID { get; set; }
     }
 }
