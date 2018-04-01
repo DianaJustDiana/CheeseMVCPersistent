@@ -11,6 +11,16 @@ namespace CheeseMVC.Controllers
 {
     public class MenuController : Controller
     {
+        
+        
+        private readonly CheeseDbContext context;
+
+        public MenuController(CheeseDbContext dbContext)
+        {
+            context = dbContext;
+        }
+        
+        
         // GET
         public IActionResult Index()
         {
@@ -54,13 +64,13 @@ namespace CheeseMVC.Controllers
 
             Menu menu = context.Menus.Single(m => m.ID == id);
 
-            ViewMenuViewModel viewModel = new ViewMenuViewModel
+            ViewMenuViewModel viewMenuViewModel = new ViewMenuViewModel
             {
                 Menu = menu,
                 Items = items
             };
 
-            return View(viewModel);
+            return View(viewMenuViewModel);
         }
 
         //get
@@ -105,11 +115,6 @@ namespace CheeseMVC.Controllers
         
         
         
-        private readonly CheeseDbContext context;
-
-        public MenuController(CheeseDbContext dbContext)
-        {
-            context = dbContext;
-        }
+       
     }
 }

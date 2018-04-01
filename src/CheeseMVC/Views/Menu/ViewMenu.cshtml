@@ -1,4 +1,4 @@
-﻿@model CheeseMVC.ViewModels.AddMenuViewModel
+﻿@model CheeseMVC.ViewModels.ViewMenuViewModel
 
 @{
     ViewBag.title = Model.Menu.Name;
@@ -8,7 +8,7 @@
     @foreach
         (var cheeseMenu in Model.Items)
     {
-        <li>@cheeseMenu.Cheeses.Name</li>
+        <li>@cheeseMenu.Cheese.Name</li>
     }
 </ul>
 
