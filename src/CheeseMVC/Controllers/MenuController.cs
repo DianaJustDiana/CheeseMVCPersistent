@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.WindowsAzure.Storage.Queue;
 
+
 namespace CheeseMVC.Controllers
 {
     public class MenuController : Controller
@@ -78,7 +79,7 @@ namespace CheeseMVC.Controllers
         {
             Menu menu = context.Menus.Single(m => m.ID == id);
             List<Cheese> cheeses = context.Cheeses.ToList();
-            
+                        
             return View(new AddMenuItemViewModel(menu, cheeses));
         }
 
