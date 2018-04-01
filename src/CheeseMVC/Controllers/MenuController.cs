@@ -86,15 +86,21 @@ namespace CheeseMVC.Controllers
 
                 if (existingItems.Count == 0)
                 {
-                    CheeseMenu menuItem = new CheeseMenu();
+                    CheeseMenu menuItem = new CheeseMenu
                     {
                         Cheese = context.Cheeses.Single(c => c.ID == cheeseID),
                         Menu = context.Menus.Single(m => m.ID == menuID)
-                    }
-                }
+                    };
                     
-                                                                                  )
+                    context.CheeseMenus.Add(menuItem);
+                    context.SaveChanges();
+                }
+
+                return Redirect(string.Format("/Menu/ViewMenu/{0}", addMenuItemViewModel));
+
             }
+
+            return View(addMenuItemViewModel);
         }
         
         
